@@ -1,9 +1,9 @@
-{ name, stdenv, perl, makeWrapper, sqitchModule, databaseModule }:
+{ name, stdenv, perl, sqitchModule, databaseModule }:
 
 stdenv.mkDerivation {
   name = "${name}-${sqitchModule.version}";
 
-  buildInputs = [ perl makeWrapper sqitchModule databaseModule ];
+  buildInputs = [ perl sqitchModule databaseModule ];
 
   src = sqitchModule;
   dontBuild = true;
@@ -21,7 +21,4 @@ stdenv.mkDerivation {
   dontStrip = true;
   postFixup = "wrapProgram $out/bin/sqitch --prefix PERL5LIB : $PERL5LIB";
 
-  meta = {
-    platforms = stdenv.lib.platforms.unix;
-  };
 }
